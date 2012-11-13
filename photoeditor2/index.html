@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>minKer Photo editor</title>
+    <link rel="stylesheet" href="../plugins/bootstrap.min.css" media="all">
+    <link rel="stylesheet" href="../plugins/bootstrap-responsive.min.css" media="all">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" media="all">
+    <link rel="stylesheet" href="editor.css" media="all">
+    <script src="../plugins/jquery-1.8.2.min.js"></script>
+    <script src="../plugins/jquery-ui-1.9.1.custom.min.js"></script>
+    <script src="../plugins/bootstrap.min.js"></script>
+    <script src="../common/app.js"></script>
+    <script src="../common/tab.js"></script>
+    <script src="editor_action.js"></script>
+    <script src="editor_filter.js"></script>
+    <script src="editor_main.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="header"><h1>minKer Photo editor</h1></div>
+</div><!-- /container -->
+
+<div class="container">
+    <div class="row">
+        <div class="span12"><input id="upload" name="upload" type="file" value="File Upload"></div>
+    </div><!-- /row-wrapper -->
+    <div class="row">
+        <div id="view" class="view span12">
+            <div id="selection"></div>
+        </div>
+    </div><!-- /row -->
+    <div class="row">
+        <div class="span3"><button id="show-dialog" class="btn">画像加工</button></div>
+        <div class="span3"><button id="original" class="btn">オリジナル表示</button></div>
+        <div class="span2">横 <input id="org-width" class="num-input" type="text" size="3" disabled="disabled"></div>
+        <div class="span2">縦 <input id="org-height" class="num-input" type="text" size="3" disabled="disabled"></div>
+        <!-- <div class="span3"><button id="submit" class="btn">送信</button></div> -->
+    </div><!-- /row -->
+
+    <!-- 画像加工ダイアログ -->
+    <div id="dialog" title="画像加工ダイアログ">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">リサイズ</a></li>
+            <li><a href="#">トリミング</a></li>
+            <li><a href="#">エフェクト</a></li>
+        </ul>
+        <div id="tabs-1" class="tabs">
+            <h4>リサイズ</h4>
+            <div>
+                横: <input id="width" class="num-input" type="text" size="5">
+                縦: <input id="height" class="num-input" type="text" size="5">
+            </div>
+            <div>
+                縦横固 <input id="ratio" type="checkbox" name="ratio">
+            </div>
+            <div>
+                <button id="resize" class="btn">リサイズ</button>
+            </div>
+        </div><!-- /tabs -->
+        <div id="tabs-2" class="tabs">
+            <h4>トリミング</h4>
+            <div>
+                横: <input id="trim-width" class="num-input" type="text" size="8">
+                縦: <input id="trim-height" class="num-input" type="text" size="8">
+            </div>
+            <div>
+                横: <input id="selected-width" class="num-input" type="text" size="8" disabled="disabled">
+                縦: <input id="selected-height" class="num-input" type="text" size="8" disabled="disabled">
+            </div>
+            <div>
+                <button id="select" class="btn">選択範囲表示</button>
+            </div>
+            <div>
+                <button id="trimming" class="btn">トリミング</button>
+            </div>
+        </div><!-- /tabs -->
+        <div id="tabs-3" class="tabs">
+            <h4>エフェクト</h4>
+            <div><button id="mono" class="btn">モノクロ</button></div>
+        </div><!-- /tabs -->
+    </div><!-- /dialog -->
+</div><!-- /container -->
+</body>
+</html>
