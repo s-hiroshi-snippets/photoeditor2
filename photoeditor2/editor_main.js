@@ -3,4 +3,6 @@ jQuery(function($) {
     var editor = App.namespace('photoeditor');
     var filter = App.namespace('filter');
     editor.setFilter(filter);
+    var validation = App.namespace('validation');
+    editor.setValidation(validation);
 });

@@ -33,6 +33,18 @@ jQuery(function($) {
         var original;
         var filetype;
 
+        // validationオブジェクト
+        var validation;
+
+        /**
+         * validationオブジェクトを設定する。
+         * @param {Object} obj
+         * App.namespace('validation')で取得したオブジェクト
+         */
+        function setValidation(obj) {
+            validation = obj;
+        }
+
         // filterオブジェクト
         var filter;
 
@@ -43,11 +55,6 @@ jQuery(function($) {
          */
         function setFilter(filterObject) {
             filter = filterObject;
-        }
-
-        // エラー表示
-        function alert(text) {
-            window.alert(text);
         }
 
         // エラー表示
@@ -183,6 +190,7 @@ jQuery(function($) {
          * リサイズ
          */
         $('#resize').click(function () {
+
             // バリデーション
             // 横
             var width = $('#width').val();
@@ -191,52 +199,25 @@ jQuery(function($) {
             // 縦横比固定
             var isRatio = $('#ratio').is(':checked');
 
-            if (width === '' && height === '') {
-                alert('横幅または縦幅を入力してください。');
+            // 横または縦にプラスの値が入力されているか。
+            if (isRatio === false &&
+                (validation.isMoreThan0(width) === false  || validation.isMoreThan0(height) === false)) {
+                alert('縦横比固定にチェックがないときは横・縦の両方入力ください。');
                 return false;
             }
 
-            if (isRatio === false && (width === '' || height === '')) {
-                alert('縦横比固定にチェックを入れてない場合横・縦の両方入力してくだい。');
-            }
-
-            // widthを数値へキャスト
-            if (width !== '') {
-                try {
-                    width = parseInt(width, 10);
-                } catch (e) {
-                    alert('数字を入力してください');
-                    return false;
-                }
-            }
-
-            // heightを数値へキャスト
-            if (height !== '') {
-                try {
-                    height = parseInt(height, 10);
-                } catch (e) {
-                    alert('数字を入力してください');
-                    return false;
-                }
-            }
-
-            if (width !== '' && width <= 0) {
-                alert('横幅はプラスの数字を入力してください');
-                return false;
-            }
-
-            if (height !== '' && height <= 0) {
-                alert('縦幅はプラスの数字を入力してください');
-                return false;
+            if (isRatio === true &&
+                (validation.isMoreThan0(width) === false && validation.isMoreThan0(height) === false)) {
+                alert('縦横比固定の場合は横または縦を入力くだい。');
             }
 
             // 縦横比固定優先
             // 縦横比固定のときは横幅優先
-            if (isRatio && width > 0) {
+            if (isRatio === true && validation.isMoreThan0(width) === true) {
                 height = Math.floor(canvas.height * (width / canvas.width));
                 $('#height').val(height);
             }
-            else if (isRatio && height > 0) {
+            else if (isRatio ===  true && validation.isMoreThan0(height) === true) {
                 width = Math.floor(canvas.width * (height / canvas.height));
                 $('#width').val();
             }
@@ -408,6 +389,7 @@ jQuery(function($) {
 
         // 公開メソッド
         photoeditor.setFilter = setFilter;
+        photoeditor.setValidation = setValidation;
 
     }());
 
