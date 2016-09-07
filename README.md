@@ -1,6 +1,8 @@
 Canvasを使った画像加工
 =====
 
+*[https://github.com/s-hiroshi/photoeditor](https://github.com/s-hiroshi/photoeditor)が正式版です。こちらは練習用です。*
+
 
 確認ブラウザ
 ----------
